@@ -1,7 +1,7 @@
 {
-  "name": "unpapper",
+  "name": "unpaper",
   "version": "0.0.1",
-  "description": "Electron set image from Unsplash as wallpaper (OS X and Windows)",
+  "description": "App, which sets image from Unsplash as wallpaper (OS X and Windows)",
   "repository": "git@github.com:distolma/unpaper.git",
   "author": "distolma <djmakaron2009@gmail.com>",
   "license": "MIT",
@@ -30,6 +30,7 @@
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5",
     "rxjs": "^5.5.6",
+    "source-map-support": "^0.5.3",
     "wallpaper": "^2.6.0",
     "zone.js": "^0.8.20"
   },
