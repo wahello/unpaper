@@ -1,9 +1,0 @@
-{
-  "presets": [
-    ["env", {
-      "targets": {
-        "node": true,
-        "electron": "1.7.3"
-      }
-    }], "react", "stage-0"]
-}
