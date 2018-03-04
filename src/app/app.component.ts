@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { IpcService } from './shared/ipc.service';
+
+import { GET_RANDOM_PHOTO } from '../ipc-channels';
 
 @Component({
   selector: 'unpaper-root',
@@ -6,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'unpaper';
+  constructor(private ipc: IpcService) {
+    this.ipc.sendMessage(GET_RANDOM_PHOTO).subscribe(console.log);
+  }
 }
