@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start:main": "electron-webpack dev",
-    "start:renderer": "ng serve",
+    "start:renderer": "ng serve --aot",
     "build:main": "ng build --prod",
     "build:rendrer": "electron-webpack",
     "test": "ng test",
