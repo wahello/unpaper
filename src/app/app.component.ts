@@ -9,7 +9,9 @@ import { GET_RANDOM_PHOTO } from '../ipc-channels';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private ipc: IpcService) {
+  constructor(private ipc: IpcService) {}
+
+  public onClick() {
     this.ipc.sendMessage(GET_RANDOM_PHOTO).subscribe(console.log);
   }
 }
