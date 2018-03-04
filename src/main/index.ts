@@ -3,6 +3,7 @@ import { app } from 'electron';
 
 import { AppModule } from './app.module';
 
+require('dotenv').config();
 require('electron-unhandled')();
 
 app.once('ready', async () => {
