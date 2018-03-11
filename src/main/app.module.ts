@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 
+import { WallpaperService } from './services/wallpaper.service';
+import { UpdateService } from './services/update.service';
+import { ViewService } from './services/view.service';
+import { IpcService } from './services/ipc.service';
 import { AppComponent } from './app.component';
-import { ViewService } from './view.service';
-import { IpcService } from './ipc.service';
-import { WallpaperService } from './wallpaper.service';
-import { UnsplashService } from './unspalsh.service';
 
 @Module({
-  components: [AppComponent, ViewService, IpcService, WallpaperService, UnsplashService],
+  components: [AppComponent, ViewService, IpcService, WallpaperService, UpdateService],
 })
 export class AppModule {}

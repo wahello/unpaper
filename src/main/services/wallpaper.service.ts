@@ -1,14 +1,14 @@
-import { Component } from '@nestjs/common';
+import { Component, OnModuleInit } from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
-import { screen } from 'electron';
-import * as fs from 'fs';
+import * as wallpaper from 'wallpaper';
 import * as path from 'path';
+import * as fs from 'fs';
 
 @Component()
-export class UnsplashService {
+export class WallpaperService implements OnModuleInit {
   private axios: AxiosInstance;
 
-  constructor() {
+  public onModuleInit() {
     this.axios = axios.create({
       baseURL: process.env.UNSPLASH_URL,
       headers: {
@@ -17,13 +17,8 @@ export class UnsplashService {
     });
   }
 
-  public getRandomPhoto() {
-    return this.axios('photos/random', {
-      params: {
-        fm: 'jpg',
-        ...this.getScreenSize(),
-      },
-    });
+  public setWallpaper(path: string) {
+    return wallpaper.set(path, { scale: 'fill' });
   }
 
   public downloadImage(url: string, name: string, folder: string) {
@@ -38,15 +33,5 @@ export class UnsplashService {
       writableStream.on('close', () => resolve(filePath));
       writableStream.on('error', reject);
     });
-  }
-
-  private getScreenSize() {
-    const { height, width } = screen.getPrimaryDisplay().size;
-    if (width > height) {
-      return { orientation: 'landscape', w: width };
-    } else if (width === height) {
-      return { orientation: 'squarish', w: width };
-    }
-    return { orientation: 'portrait', h: height };
   }
 }
