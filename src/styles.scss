@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~material-design-icons-iconfont/dist/material-design-icons.css';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  position: relative;
+  padding-top: 5px;
+}
+
+html {
+  background-color: transparent;
+}
+
+// // :not(button):not(a),
+// :not(input):not(textarea),
+// :not(input):not(textarea)::after,
+// :not(input):not(textarea)::before {
+//   user-select: none;
+//   // cursor: default;
+// }
+
+.test {
+  background-color: #fff;
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  margin-left: -5px;
+  height: 10px;
+  width: 10px;
+  transform: rotate(45deg);
+}

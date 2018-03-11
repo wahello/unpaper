@@ -1,3 +1,17 @@
-<h1>Unpaper</h1>
-<button (click)="onClick()">get image</button>
-<router-outlet></router-outlet>
+<mat-toolbar>
+  <span>Unpaper</span>
+  <span class="example-spacer"></span>
+
+  <div>
+    <button mat-icon-button class="card__info" matTooltip="Refresh!" matTooltipShowDelay="1000" (click)="onClick()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <button mat-icon-button class="card__info">
+      <mat-icon>settings</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+<div class="grid">
+  <unpaper-card *ngFor="let photo of (photos$ | async)" [photo]="photo" (setImage)="onSetImage($event)"></unpaper-card>
+</div>

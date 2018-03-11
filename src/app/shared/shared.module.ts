@@ -1,11 +1,24 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxElectronModule } from 'ngx-electron';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NgxElectronModule } from 'ngx-electron';
 
-import { IpcService } from './ipc.service';
+import { UnsplashInterceptor } from './interceptors/unsplash.interceptor';
+import { ApiService } from './services/api.service';
+import { IpcService } from './services/ipc.service';
+import { MaterialModule } from './modules/material.module';
 
 @NgModule({
-  imports: [CommonModule, NgxElectronModule],
-  providers: [IpcService],
+  imports: [CommonModule, NgxElectronModule, MaterialModule, HttpClientModule],
+  exports: [MaterialModule],
+  providers: [
+    IpcService,
+    ApiService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UnsplashInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class SharedModule {}

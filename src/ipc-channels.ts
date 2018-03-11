@@ -1,1 +1,1 @@
-export const GET_RANDOM_PHOTO = 'get_random_photo';
+export const SET_WALLPAPER = 'set_wallpaper';
