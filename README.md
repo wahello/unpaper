@@ -2,7 +2,7 @@
 
 * [ ] Setup Auto-Updater
 * [ ] Custom folder to store images
-* [ ] Compose readme
+* [ ] a
 * [ ] Setup multi platform build
 * [ ] Add tests
 * [ ] Add notifications
