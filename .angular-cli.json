@@ -49,6 +49,9 @@
     }
   },
   "defaults": {
-    "styleExt": "scss"
+    "styleExt": "scss",
+    "schematics": {
+      "collection": "@ngrx/schematics"
+    }
   }
 }
