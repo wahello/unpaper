@@ -1,2 +1,4 @@
+whiteListedModules:
+- node-notifier
 renderer:
   sourceDirectory:
