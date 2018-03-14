@@ -1,25 +1,47 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { CardComponent } from './card.component';
+import { CardComponent } from './card.component';
+import { MaterialModule } from '../shared/modules/material.module';
 
-// describe('CardComponent', () => {
-//   let component: CardComponent;
-//   let fixture: ComponentFixture<CardComponent>;
+const mockPhoto = {
+  urls: {
+    regular: '',
+  },
+  likes: 100,
+  user: {
+    name: '',
+    location: '',
+    profile_image: {
+      medium: '',
+    },
+  },
+};
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ CardComponent ]
-//     })
-//     .compileComponents();
-//   }));
+describe('CardComponent', () => {
+  let component: CardComponent;
+  let fixture: ComponentFixture<CardComponent>;
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(CardComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [CardComponent],
+      imports: [MaterialModule],
+    });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+    fixture = TestBed.createComponent(CardComponent);
+    component = fixture.componentInstance;
+    component.photo = mockPhoto;
+
+    fixture.autoDetectChanges();
+  });
+
+  describe('#setImageHandler', () => {
+    it('should emit event on image set', done => {
+      component.setImage.subscribe(photo => {
+        expect(component.photo).toBe(photo);
+        done();
+      });
+
+      component.setImageHandler();
+    });
+  });
+});
