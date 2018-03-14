@@ -17,8 +17,8 @@ export class WallpaperService implements OnModuleInit {
     });
   }
 
-  public setWallpaper(path: string) {
-    return wallpaper.set(path, { scale: 'fill' });
+  public setWallpaper(imagePath: string) {
+    return wallpaper.set(imagePath, { scale: 'fill' });
   }
 
   public downloadImage(url: string, name: string, folder: string) {

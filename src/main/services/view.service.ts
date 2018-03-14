@@ -1,43 +1,31 @@
-import { Component, OnModuleInit } from '@nestjs/common';
-import { app, BrowserWindow, Tray } from 'electron';
+import { Component } from '@nestjs/common';
+import { BrowserWindow, Tray, Menu } from 'electron';
 import { format as formatUrl } from 'url';
 import * as path from 'path';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
 @Component()
-export class ViewService implements OnModuleInit {
+export class ViewService {
   public mainWindow: BrowserWindow | null = null;
   public tray: Tray | null = null;
 
-  public onModuleInit() {
+  constructor() {
     this.mainWindow = this.createMainWindow();
     this.tray = this.createTray();
-
-    app.on('window-all-closed', () => {
-      if (process.platform !== 'darwin') {
-        app.quit();
-      }
-    });
-
-    app.on('activate', () => {
-      if (this.mainWindow === null) {
-        this.mainWindow = this.createMainWindow();
-      }
-    });
   }
 
-  public toggle() {
+  public toggleWindow() {
     if (this.mainWindow) {
       if (this.mainWindow.isVisible()) {
         this.mainWindow.hide();
       } else {
-        this.show();
+        this.showWindow();
       }
     }
   }
 
-  public show() {
+  public showWindow() {
     if (this.mainWindow) {
       const position = this.getWindowPosition();
       if (position) {
@@ -55,11 +43,11 @@ export class ViewService implements OnModuleInit {
 
       const x = Math.round(trayBounds.x + trayBounds.width / 2 - windowBounds.width / 2);
       const y = Math.round(trayBounds.y + trayBounds.height + 4);
-      return { x: x, y: y };
+      return { x, y };
     }
   }
 
-  private createMainWindow() {
+  public createMainWindow() {
     const window = new BrowserWindow({
       show: false,
       width: 700,
@@ -91,26 +79,45 @@ export class ViewService implements OnModuleInit {
       this.mainWindow = null;
     });
 
-    window.once('ready-to-show', () => {
-      // this.show();
+    window.on('show', () => {
+      if (this.tray) this.tray.setHighlightMode('always');
     });
+
+    window.on('hide', () => {
+      if (this.tray) this.tray.setHighlightMode('never');
+    });
+
+    window.on('blur', () => {
+      if (!isDevelopment) window.hide();
+    });
+
+    // window.once('ready-to-show', () => {
+    //   // this.show();
+    // });
 
     window.webContents.on('devtools-opened', () => {
       window.focus();
-      setImmediate(() => {
-        window.focus();
-      });
+      setImmediate(() => window.focus());
     });
 
     return window;
   }
 
-  private createTray() {
+  public createTray() {
     const tray = new Tray(path.join(__static, 'sunTemplate.png'));
+    const contextMenu = Menu.buildFromTemplate([
+      { label: 'Settings', type: 'normal', accelerator: 'CommandOrControl+,' },
+      { type: 'separator' },
+      { label: 'Quit', role: 'quit', accelerator: 'CommandOrControl+Q' },
+    ]);
 
-    tray.on('click', this.toggle.bind(this));
-    // tray.on('right-click', this.view.toggle.bind(this.view));
-    // tray.on('double-click', this.view.toggle.bind(this.view));
+    tray.on('click', () => this.toggleWindow());
+    tray.on('right-click', () => {
+      if (this.mainWindow && this.mainWindow.isVisible) this.mainWindow.hide();
+      tray.popUpContextMenu(contextMenu);
+    });
+
+    tray.setToolTip('Unpaper');
 
     return tray;
   }

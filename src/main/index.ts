@@ -6,7 +6,7 @@ import { AppModule } from './app.module';
 require('dotenv').config();
 require('electron-unhandled')();
 
-app.dock.hide();
+app.dock && app.dock.hide();
 
 app.once('ready', async () => {
   const app = await NestFactory.create(AppModule);
