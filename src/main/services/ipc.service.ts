@@ -13,8 +13,8 @@ export class IpcService implements OnModuleInit {
   }
 
   public onGetRandomPhoto() {
-    ipcMain.on(SET_WALLPAPER, async (event: Electron.Event, data: any) => {
-      const path = await this.wallpaper.downloadImage(data.links.download, data.id, app.getPath('downloads'));
+    ipcMain.on(SET_WALLPAPER, async (event: Electron.Event, { links, id }: any) => {
+      const path = await this.wallpaper.downloadImage(links.download, id, app.getPath('downloads'));
       await this.wallpaper.setWallpaper(path);
 
       event.sender.send(`${SET_WALLPAPER}:reply`, { value: path });
