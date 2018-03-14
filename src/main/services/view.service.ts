@@ -1,5 +1,6 @@
-import { Component } from '@nestjs/common';
+import * as positioner from 'electron-traywindow-positioner';
 import { BrowserWindow, Tray, Menu } from 'electron';
+import { Component } from '@nestjs/common';
 import { format as formatUrl } from 'url';
 import * as path from 'path';
 
@@ -26,24 +27,12 @@ export class ViewService {
   }
 
   public showWindow() {
-    if (this.mainWindow) {
-      const position = this.getWindowPosition();
-      if (position) {
-        this.mainWindow.setPosition(position.x, position.y, false);
-      }
+    if (this.mainWindow && this.tray) {
+      const position = positioner.calculate(this.mainWindow.getBounds(), this.tray.getBounds());
+
+      this.mainWindow.setPosition(position.x, position.y, false);
       this.mainWindow.show();
       this.mainWindow.focus();
-    }
-  }
-
-  public getWindowPosition() {
-    if (this.mainWindow && this.tray) {
-      const windowBounds = this.mainWindow.getBounds();
-      const trayBounds = this.tray.getBounds();
-
-      const x = Math.round(trayBounds.x + trayBounds.width / 2 - windowBounds.width / 2);
-      const y = Math.round(trayBounds.y + trayBounds.height + 4);
-      return { x, y };
     }
   }
 
@@ -57,6 +46,7 @@ export class ViewService {
       fullscreenable: false,
       transparent: true,
       resizable: isDevelopment,
+      alwaysOnTop: isDevelopment,
       webPreferences: {
         backgroundThrottling: false,
       },
