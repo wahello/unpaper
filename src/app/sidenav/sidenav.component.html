@@ -1,0 +1,19 @@
+<div class="sidenav">
+  <mat-toolbar class="sidenav__toolbar">
+    Menu
+    <button mat-icon-button
+            (click)="onClose()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+  <nav class="sidenav__nav">
+    <a *ngFor="let item of menuItems"
+       [routerLink]="item?.value"
+       routerLinkActive="selected"
+       (click)="onClose()"
+       [attr.disabled]="true"
+       class="sidenav__nav-item">
+      <mat-icon>{{ item?.icon }}</mat-icon>{{ item?.text }}
+    </a>
+  </nav>
+</div>
