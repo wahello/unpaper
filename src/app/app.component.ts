@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
+import { Store } from '@ngrx/store';
 
+import { LoadPhotos } from './shared/store/photo/photo.actions';
 import { State } from './shared/store/root.reducer';
-import { LoadPhotos, SetPhoto } from './shared/store/photo/photo.actions';
-import { allPhotosSelector } from './shared/store/photo/photo.selectors';
 
 @Component({
   selector: 'unpaper-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
-  public photos$ = this.store.select(allPhotosSelector);
+  public isAtTop = true;
 
   constructor(private store: Store<State>, private electron: ElectronService) {}
 
@@ -26,8 +26,8 @@ export class AppComponent implements OnInit {
   public onClick() {
     this.store.dispatch(new LoadPhotos());
   }
-
-  public onSetImage(event) {
-    this.store.dispatch(new SetPhoto(event));
+  public onScroll(event: Event) {
+    const element: HTMLElement = event.target as any;
+    element.scrollTop === 0 ? (this.isAtTop = true) : (this.isAtTop = false);
   }
 }
