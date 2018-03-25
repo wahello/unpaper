@@ -40,11 +40,11 @@ export class ViewService {
     const window = new BrowserWindow({
       show: false,
       width: 700,
-      height: 500,
+      height: 451,
       useContentSize: true,
       frame: false,
       fullscreenable: false,
-      transparent: true,
+      titleBarStyle: 'hidden',
       resizable: isDevelopment,
       alwaysOnTop: isDevelopment,
       webPreferences: {
