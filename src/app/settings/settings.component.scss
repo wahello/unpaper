@@ -1,0 +1,21 @@
+.settings {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__container {
+    padding: 16px;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  &__card {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+  }
+}
