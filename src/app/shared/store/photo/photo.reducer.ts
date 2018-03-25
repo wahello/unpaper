@@ -4,13 +4,13 @@ import { Photo } from './photo.model';
 import { PhotoActions, PhotoActionTypes } from './photo.actions';
 
 export interface State extends EntityState<Photo> {
-  // additional entities state properties
+  isLoading: boolean;
 }
 
 export const adapter: EntityAdapter<Photo> = createEntityAdapter<Photo>();
 
 export const initialState: State = adapter.getInitialState({
-  // additional entity state properties
+  isLoading: false,
 });
 
 export function reducer(state = initialState, action: PhotoActions): State {
@@ -23,8 +23,18 @@ export function reducer(state = initialState, action: PhotoActions): State {
     //   return adapter.upsertOne(action.payload.photo, state);
     // }
 
+    case PhotoActionTypes.LoadPhotos: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
     case PhotoActionTypes.AddPhotos: {
-      return adapter.addMany(action.payload.photos, state);
+      return {
+        ...adapter.addMany(action.payload.photos, state),
+        isLoading: false,
+      };
     }
 
     // case PhotoActionTypes.UpsertPhotos: {
