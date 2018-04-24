@@ -1,6 +1,7 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxElectronModule } from 'ngx-electron';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { UnsplashInterceptor } from './interceptors/unsplash.interceptor';
@@ -9,7 +10,7 @@ import { IpcService } from './services/ipc.service';
 import { MaterialModule } from './modules/material.module';
 
 @NgModule({
-  imports: [CommonModule, NgxElectronModule, MaterialModule, HttpClientModule],
+  imports: [CommonModule, NgxElectronModule, MaterialModule, HttpClientModule, RouterModule],
   exports: [MaterialModule],
   providers: [
     IpcService,
