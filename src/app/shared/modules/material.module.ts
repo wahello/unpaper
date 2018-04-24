@@ -1,7 +1,25 @@
+import {
+  MatCardModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatTooltipModule,
+  MatSidenavModule,
+  MatListModule,
+  MatProgressSpinnerModule,
+} from '@angular/material';
 import { NgModule } from '@angular/core';
-import { MatCardModule, MatButtonModule, MatToolbarModule, MatIconModule, MatTooltipModule } from '@angular/material';
 
-const MODULES = [MatCardModule, MatButtonModule, MatToolbarModule, MatIconModule, MatTooltipModule];
+const MODULES = [
+  MatCardModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatTooltipModule,
+  MatSidenavModule,
+  MatListModule,
+  MatProgressSpinnerModule,
+];
 
 @NgModule({
   imports: MODULES,
