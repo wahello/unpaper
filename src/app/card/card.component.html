@@ -1,13 +1,14 @@
 <mat-card class="card">
   <div class="card__bg"
-       [style.backgroundImage]="sanitizeURL(photo.urls.regular)"></div>
+       [style.backgroundImage]="sanitizeURL(photo?.urls?.regular)"></div>
   <div class="card__content">
     <mat-card-header class="card__header">
       <div mat-card-avatar
            class="card__avatar"
-           [style.backgroundImage]="sanitizeURL(photo.user.profile_image.medium)"></div>
-      <mat-card-title class="card__title">{{photo.user.name}}</mat-card-title>
-      <mat-card-subtitle class="card__subtitle">{{photo.user.location}}</mat-card-subtitle>
+           [style.backgroundImage]="sanitizeURL(photo?.user?.profile_image?.medium)"></div>
+      <mat-card-title class="card__title"
+                      (click)="openExternal(photo?.user?.links?.html)">{{photo?.user?.name}}</mat-card-title>
+      <mat-card-subtitle class="card__subtitle">{{photo?.user?.location}}</mat-card-subtitle>
 
       <!-- <button mat-icon-button class="card__info">
         <mat-icon>info</mat-icon>
@@ -25,7 +26,7 @@
 
       <div class="card__favorite">
         <mat-icon>favorite</mat-icon>
-        {{ photo.likes }}
+        {{ photo?.likes }}
       </div>
     </div>
   </div>

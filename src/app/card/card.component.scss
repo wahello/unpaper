@@ -10,6 +10,10 @@
     padding: 0;
   }
 
+  &__title {
+    cursor: pointer;
+  }
+
   &__bg {
     height: 100%;
     width: 100%;

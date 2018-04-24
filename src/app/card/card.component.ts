@@ -7,6 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ElectronService } from 'ngx-electron';
 
 @Component({
   selector: 'unpaper-card',
@@ -19,7 +20,10 @@ export class CardComponent {
   @Input() public photo;
   @Output() public setImage = new EventEmitter();
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(
+    private sanitizer: DomSanitizer,
+    private electron: ElectronService,
+  ) {}
 
   public sanitizeURL(url: string) {
     return this.sanitizer.bypassSecurityTrustStyle(`url(${url})`);
@@ -27,5 +31,9 @@ export class CardComponent {
 
   public setImageHandler() {
     this.setImage.emit(this.photo);
+  }
+
+  public openExternal(url: string) {
+    this.electron.shell.openExternal(url);
   }
 }
