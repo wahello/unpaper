@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
+import { Observable, Observer } from 'rxjs';
 
 @Injectable()
 export class IpcService {
