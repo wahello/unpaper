@@ -1,13 +1,8 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ElectronService } from 'ngx-electron';
+
+import { Photo } from '../shared/store/photo.store';
 
 @Component({
   selector: 'unpaper-card',
@@ -17,20 +12,16 @@ import { ElectronService } from 'ngx-electron';
   encapsulation: ViewEncapsulation.None,
 })
 export class CardComponent {
-  @Input() public photo;
-  @Output() public setImage = new EventEmitter();
+  @Input() public photo: Photo;
 
-  constructor(
-    private sanitizer: DomSanitizer,
-    private electron: ElectronService,
-  ) {}
+  constructor(private sanitizer: DomSanitizer, private electron: ElectronService) {}
 
   public sanitizeURL(url: string) {
     return this.sanitizer.bypassSecurityTrustStyle(`url(${url})`);
   }
 
   public setImageHandler() {
-    this.setImage.emit(this.photo);
+    this.photo.setWallpaper();
   }
 
   public openExternal(url: string) {

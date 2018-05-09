@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { ElectronService } from 'ngx-electron';
+
+import { IPhoto } from '../store/photo.store';
 
 @Injectable()
 export class ApiService {
   constructor(private http: HttpClient, private electron: ElectronService) {}
 
   public getRandomPhoto() {
-    return this.http.get('unsplash/photos/random', {
+    return this.http.get<IPhoto[]>('unsplash/photos/random', {
       params: {
         fm: 'jpg',
         count: 4,

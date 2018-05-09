@@ -2,7 +2,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppStoreModule } from './shared/store/app-store.module';
+import { StoreModule } from './shared/store/store.module';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CardComponent } from './card/card.component';
@@ -25,7 +25,7 @@ import { PopularComponent } from './popular/popular.component';
     HistoryComponent,
     PopularComponent,
   ],
-  imports: [BrowserModule, SharedModule, AppRoutingModule, AppStoreModule, BrowserAnimationsModule],
+  imports: [BrowserModule, SharedModule, AppRoutingModule, BrowserAnimationsModule, StoreModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

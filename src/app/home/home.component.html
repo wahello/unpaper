@@ -1,9 +1,8 @@
-<div class="home">
+<div class="home" *mobxAutorun>
   <div class="home__container">
     <div class="home__grid">
-      <unpaper-card *ngFor="let photo of (photos$ | async)"
-                    [photo]="photo"
-                    (setImage)="onSetImage($event)"></unpaper-card>
+      <unpaper-card *ngFor="let photo of photosStore.photos"
+                    [photo]="photo"></unpaper-card>
     </div>
   </div>
 </div>
