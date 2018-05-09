@@ -24,6 +24,8 @@ export class UpdateService implements OnModuleInit {
   }
 
   public onModuleInit() {
-    autoUpdater.checkForUpdatesAndNotify();
+    if (process.env.NODE_ENV === 'production') {
+      autoUpdater.checkForUpdates();
+    }
   }
 }

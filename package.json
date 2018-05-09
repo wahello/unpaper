@@ -1,6 +1,6 @@
 {
   "name": "unpaper",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "App, which sets image from Unsplash as wallpaper (OS X and Windows)",
   "repository": "git@github.com:distolma/unpaper.git",
   "author": "distolma <djmakaron2009@gmail.com>",
@@ -13,7 +13,7 @@
     "test": "ng test -sm false",
     "lint": "ng lint",
     "prerelease": "run-s build:*",
-    "release": "electron-builder"
+    "release": "electron-builder -p always"
   },
   "private": false,
   "dependencies": {

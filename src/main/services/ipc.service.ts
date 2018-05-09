@@ -17,7 +17,7 @@ export class IpcService implements OnModuleInit {
       const path = await this.wallpaper.downloadImage(links.download, id, app.getPath('downloads'));
       await this.wallpaper.setWallpaper(path);
 
-      event.sender.send(`${SET_WALLPAPER}:reply`, { value: path });
+      event.sender.send(`${SET_WALLPAPER}:reply`, { done: false, value: path });
       event.sender.send(`${SET_WALLPAPER}:reply`, { done: true });
     });
   }
