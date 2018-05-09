@@ -1,4 +1,7 @@
-import electronDevtoolsInstaller, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
+import electronDevtoolsInstaller, {
+  REDUX_DEVTOOLS,
+  MOBX_DEVTOOLS,
+} from 'electron-devtools-installer';
 import { Component, OnModuleInit } from '@nestjs/common';
 import { app } from 'electron';
 
@@ -10,6 +13,7 @@ export class AppComponent implements OnModuleInit {
 
   public async onModuleInit() {
     await electronDevtoolsInstaller(REDUX_DEVTOOLS);
+    await electronDevtoolsInstaller(MOBX_DEVTOOLS);
 
     app.on('window-all-closed', () => {
       if (process.platform !== 'darwin') {
