@@ -1,6 +1,6 @@
 {
   "name": "unpaper",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "App, which sets image from Unsplash as wallpaper (OS X and Windows)",
   "repository": "git@github.com:distolma/unpaper.git",
   "author": "distolma <djmakaron2009@gmail.com>",
