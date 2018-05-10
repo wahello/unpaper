@@ -44,7 +44,8 @@ export class ViewService {
       useContentSize: true,
       frame: false,
       fullscreenable: false,
-      titleBarStyle: 'hidden',
+      movable: false,
+      titleBarStyle: 'customButtonsOnHover',
       resizable: isDevelopment,
       alwaysOnTop: isDevelopment,
       webPreferences: {
